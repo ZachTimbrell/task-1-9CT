@@ -50,5 +50,6 @@ c. Update a data entry (e.g., change a value or correct an error)
 
 - Any valid updates are saved by the system.
 
-- Data remains available for further queries or analysis.Actor: User
+- 
+Data remains available for further queries or analysis.Actor: User
 
