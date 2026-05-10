@@ -1,6 +1,10 @@
 import pandas as pd
 def display_dataset_preview_GSW():
     display_dataset_preview_GSW = pd.DataFrame([
+    ['']
+
+def display_dataset_preview_bulls():
+    display_dataset_preview_bulls = pd.DataFrame([
     ['0', 'PG', '6-2', '190', 'May 22, 1968']
     ['25', 'PG',	'6-3',	'175',	'September 27, 1965']
     ['9', 'PG',	'6-6',	'185',	'January 20, 1964']
@@ -15,7 +19,7 @@ def display_dataset_preview_GSW():
     ['53', 'C',	'7-1',	'252',	'November 22, 1955']
     ['54', 'C',	'6-10',	'240	January 27, 1964']
     ['13', 'C',	'7-2',	'265',	'January 19, 1969']
-    ['34', 'C',	'7-0',	'245',	'April 26, 1963']  
-    ], columns = ['Randy Brown', 'Steve Kerr', 'Ron Haprer', 'Michael Jordan', 'Jud Buechler', 'Toni Kukoč', 'Scottie Pippen', 'Jasen Caffey', 'Dennis Rodman', 'John Salley', 'Dickey Simpkins', 'James Edwards', 'Jack Haley', 'luc Longley','Bill Wellington'])
-
-print(display_dataset_preview_GSW)
+    ['34','C','7-0','245','April 26, 1963']  
+    ], columns = ['Randy Brown','Steve Kerr','Ron Haprer','Michael Jordan','Jud Buechler','Toni Kukoč','Scottie Pippen','Jasen Caffey','Dennis Rodman','John Salley','Dickey Simpkins','James Edwards','Jack Haley','luc Longley','Bill Wellington']
+    , row = ('name','jersey number','position','height','weight','date of birth')
+    )
