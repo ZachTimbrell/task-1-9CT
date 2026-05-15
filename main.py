@@ -5,13 +5,15 @@ from data_module import  (
   display_dataset_averages_Bulls,
   average_GSW_graph,
   average_chicago_graph,
+  gsw_team_average,
+  chicago_team_average,
 
 )
 
 def main_menu():
     while True:
         print("==============================================================================")
-        print("=                            --DATA INTERFACE--                              =")
+        print("=                           (  DATA INTERFACE  )                             =")
         print("=             --1996 CHICAGO BULLS VS 2016 GOLDEN STATE WARRIORS--           =")
         print("==============================================================================")
         print("=    OPTIONS:                                                                =")
@@ -20,11 +22,14 @@ def main_menu():
         print("=    3. view dataset for 2016 Golden State Warriors                          =")
         print("=    4. View averages for 1996 Chicago Bulls                                 =")
         print("=    5. View averages for 2016 Golden State Warriors                         =")
-        print("=    6. Create graph for 2016 Golden State Warriors averages                 =")
-        print("=    7. Create graph for 1996 Chicago Bulls averages                         =")
-        print("=    8. Exit                     ")                                                               
+        print("=    6. View graph for 2016 Golden State Warriors averages                   =")
+        print("=    7. View graph for 1996 Chicago Bulls averages                           =")
+        print("=    8. View team average graph for 2016 Golden State Warriors               =")
+        print("=    9. View team average graph for 1996 Chicago Bulls                       =")
+        print("=    10. Exit                                                                =")
         print("==============================================================================")
-        choice = input("select an option from 1-8: ")
+        choice = input("select an option from 1-10: ")
+        print(":----------------------------------------------------------------------------:")
         if choice == "1":
             print('The 2016 Golden state Warriors are better than 1996 Chicago Bulls in the Regular season')
         elif choice == "2":
@@ -40,9 +45,14 @@ def main_menu():
         elif choice == "7":
             average_chicago_graph()
         elif choice == "8":
+            gsw_team_average()
+        elif choice == "9":
+            chicago_team_average()
+        elif choice == "10":
             print("Exiting Data Interface")
             break
         else:
-            print("Invalid selection. Please choose an option 1-8")
+            print("Invalid selection. Please choose an option 1-10")
+
 if __name__ == "__main__":
     main_menu()

@@ -1,5 +1,14 @@
 import os
+import platform
+import subprocess
+from pathlib import Path
 
+os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import pandas as pd
 
 
@@ -48,13 +57,25 @@ def _display_averages(title, df):
     _display_table(title, summary)
 
 
-def _create_average_graph(title, df, output_file):
-    os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
-    import matplotlib
+def _open_graph_file(graph_path):
+    system = platform.system()
 
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+    try:
+        if system == "Darwin":
+            result = subprocess.run(["open", str(graph_path)], capture_output=True, text=True, timeout=5)
+            if result.returncode != 0:
+                print("Could not open the graph automatically. Open the saved file above to view it.")
+        elif system == "Windows":
+            os.startfile(graph_path)
+        else:
+            result = subprocess.run(["xdg-open", str(graph_path)], capture_output=True, text=True, timeout=5)
+            if result.returncode != 0:
+                print("Could not open the graph automatically. Open the saved file above to view it.")
+    except Exception:
+        print("Could not open the graph automatically. Open the saved file above to view it.")
 
+
+def _create_average_graph(title, df, output_file, open_graph=True):
     graph_columns = ["Pts", "Ast", "Stl", "Blk"]
     graph_data = df[["Player"] + graph_columns].set_index("Player")
 
@@ -66,7 +87,38 @@ def _create_average_graph(title, df, output_file):
     plt.tight_layout()
     plt.savefig(output_file)
     plt.close()
-    print(f"\nGraph saved as {output_file}\n")
+
+    graph_path = Path(output_file).resolve()
+    print(f"\nGraph saved as {graph_path}\n")
+
+    if open_graph:
+        _open_graph_file(graph_path)
+
+
+def _create_team_average_graph(title, df, output_file, open_graph=True):
+    graph_columns = {
+        "Pts": "Points",
+        "TRb": "Rebounds",
+        "Ast": "Assists",
+        "Stl": "Steals",
+        "Blk": "Blocks",
+    }
+    graph_data = df[list(graph_columns.keys())].sum().rename(index=graph_columns)
+
+    graph_data.plot(kind="bar", figsize=(9, 6), color=["#1D428A", "#CE1141", "#FDB927", "#007A33", "#552583"])
+    plt.title(title)
+    plt.xlabel("Statistic")
+    plt.ylabel("Team average per game")
+    plt.xticks(rotation=0)
+    plt.tight_layout()
+    plt.savefig(output_file)
+    plt.close()
+
+    graph_path = Path(output_file).resolve()
+    print(f"\nGraph saved as {graph_path}\n")
+
+    if open_graph:
+        _open_graph_file(graph_path)
 
 
 def display_dataset_preview_bulls():
@@ -98,6 +150,22 @@ def average_GSW_graph():
         "2016 Golden State Warriors Average Points, Assists, Steals and Blocks",
         GSW_averages_df,
         "data/average_GSW_graph.png",
+    )
+
+
+def gsw_team_average():
+    _create_team_average_graph(
+        "2016 Golden State Warriors Team Averages",
+        GSW_averages_df,
+        "data/gsw_team_average.png",
+    )
+
+
+def chicago_team_average():
+    _create_team_average_graph(
+        "1996 Chicago Bulls Team Averages",
+        chicago_averages_df,
+        "data/chicago_team_average.png",
     )
 
 
