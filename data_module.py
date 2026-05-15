@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 
@@ -46,6 +48,27 @@ def _display_averages(title, df):
     _display_table(title, summary)
 
 
+def _create_average_graph(title, df, output_file):
+    os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    graph_columns = ["Pts", "Ast", "Stl", "Blk"]
+    graph_data = df[["Player"] + graph_columns].set_index("Player")
+
+    graph_data.plot(kind="bar", figsize=(14, 7))
+    plt.title(title)
+    plt.xlabel("Player")
+    plt.ylabel("Average per game")
+    plt.xticks(rotation=45, ha="right")
+    plt.tight_layout()
+    plt.savefig(output_file)
+    plt.close()
+    print(f"\nGraph saved as {output_file}\n")
+
+
 def display_dataset_preview_bulls():
     _display_table("1996 Chicago Bulls Roster", chicago_df)
 
@@ -60,6 +83,22 @@ def display_dataset_averages_Bulls():
 
 def display_dataset_averages_GSW():
     _display_table("2016 Golden State Warriors Regular Season Averages", GSW_averages_df)
+
+
+def average_chicago_graph():
+    _create_average_graph(
+        "1996 Chicago Bulls Average Points, Assists, Steals and Blocks",
+        chicago_averages_df,
+        "data/average_chicago_graph.png",
+    )
+
+
+def average_GSW_graph():
+    _create_average_graph(
+        "2016 Golden State Warriors Average Points, Assists, Steals and Blocks",
+        GSW_averages_df,
+        "data/average_GSW_graph.png",
+    )
 
 
 def add_data():
