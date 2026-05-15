@@ -3,9 +3,13 @@ import pandas as pd
 
 GSW_FILE = "data/basketball.csv"
 BULLS_FILE = "data/chicago.csv"
+GSW_AVERAGES_FILE = "data/averages_gsw.csv"
+BULLS_AVERAGES_FILE = "data/averages_Chicago.csv"
 
 GSW_df = pd.read_csv(GSW_FILE)
 chicago_df = pd.read_csv(BULLS_FILE)
+GSW_averages_df = pd.read_csv(GSW_AVERAGES_FILE, skiprows=1)
+chicago_averages_df = pd.read_csv(BULLS_AVERAGES_FILE, skiprows=1)
 
 
 def _height_to_inches(height):
@@ -51,11 +55,11 @@ def display_dataset_preview_GSW():
 
 
 def display_dataset_averages_Bulls():
-    _display_averages("1996 Chicago Bulls Averages", chicago_df)
+    _display_table("1996 Chicago Bulls Regular Season Averages", chicago_averages_df)
 
 
 def display_dataset_averages_GSW():
-    _display_averages("2016 Golden State Warriors Averages", GSW_df)
+    _display_table("2016 Golden State Warriors Regular Season Averages", GSW_averages_df)
 
 
 def add_data():
