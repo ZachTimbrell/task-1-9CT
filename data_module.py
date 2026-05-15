@@ -8,11 +8,15 @@ GSW_FILE = Path("data/basketball.csv")
 BULLS_FILE = Path("data/chicago.csv")
 GSW_AVERAGES_FILE = Path("data/averages_gsw.csv")
 BULLS_AVERAGES_FILE = Path("data/averages_Chicago.csv")
+GSW_RECORD_FILE = Path("data/track_record_gsw.csv")
+CHICAGO_TRACK_RECORD = Path("data/track_record_chicago.csv")
 
 GSW_df = pd.read_csv(GSW_FILE)
 chicago_df = pd.read_csv(BULLS_FILE)
 GSW_averages_df = pd.read_csv(GSW_AVERAGES_FILE, skiprows=1)
 chicago_averages_df = pd.read_csv(BULLS_AVERAGES_FILE, skiprows=1)
+GSW_record_df = pd.read_csv(GSW_RECORD_FILE)
+chicago_record_df = pd.read_csv(CHICAGO_TRACK_RECORD)
 
 
 
@@ -21,7 +25,7 @@ def _display_table(title, df):
     print(f"\n{title}")
     print("-" * len(title))
     print(df.to_string(index=False))
-    print()
+    print
 
 
 def _create_average_graph(title, df, output_file, open_graph=True):
@@ -80,39 +84,36 @@ def display_dataset_averages_Bulls():
 def display_dataset_averages_GSW():
     _display_table("2016 Golden State Warriors Regular Season Averages", GSW_averages_df)
 
+def track_record_gsw():
+    _display_table("2016 Golden State Warriors Regular Season Record", GSW_record_df)
+
+def track_record_chicago():
+    _display_table("1996 Chicago Bulls Regular Season Record", chicago_record_df)
 
 def average_chicago_graph():
     _create_average_graph(
         "1996 Chicago Bulls Average Points, Assists, Steals and Blocks",
         chicago_averages_df,
-        "data/average_chicago_graph.png",
-    )
+        "data/average_chicago_graph.png",)
 
 
 def average_GSW_graph():
     _create_average_graph(
         "2016 Golden State Warriors Average Points, Assists, Steals and Blocks",
         GSW_averages_df,
-        "data/average_GSW_graph.png",
-    )
+        "data/average_GSW_graph.png",)
+
 
 
 def gsw_team_average():
     _create_team_average_graph(
         "2016 Golden State Warriors Team Averages",
         GSW_averages_df,
-        "data/gsw_team_average.png",
-    )
+        "data/gsw_team_average.png",)
 
 
 def chicago_team_average():
     _create_team_average_graph(
         "1996 Chicago Bulls Team Averages",
         chicago_averages_df,
-        "data/chicago_team_average.png",
-    )
-
-
-def add_data():
-    print("\nAdd data is not connected yet.")
-    print("Next step: choose a team, collect player details, then save to CSV.\n")
+        "data/chicago_team_average.png",)
