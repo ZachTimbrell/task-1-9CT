@@ -5,7 +5,7 @@ from data_module import  (
   display_dataset_averages_Bulls,
   add_data
 
-  )
+)
 
 def main_menu():
     while True:
@@ -18,7 +18,7 @@ def main_menu():
         print("5. Add data to dataset") 
         print("6. Exit")
 
-        choice = input("select an option from 1-6").strip()
+        choice = input("select an option from 1-6")
         if choice == 1:
             print([display_dataset_preview_GSW()])
         elif choice == 2:
