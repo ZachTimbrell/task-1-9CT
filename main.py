@@ -7,31 +7,41 @@ from data_module import  (
   average_chicago_graph,
   gsw_team_average,
   chicago_team_average,
+  track_record_chicago,
+  track_record_gsw,
 
 )
+import time
+def typewrite(text):
+    for char in text:
+        print(char, end="", flush=True)
+        time.sleep(0.005)
+    print()  # Move to the next line after printing the text
 
 def main_menu():
     while True:
-        print("==============================================================================")
-        print("=                           (  DATA INTERFACE  )                             =")
-        print("=             --1996 CHICAGO BULLS VS 2016 GOLDEN STATE WARRIORS--           =")
-        print("==============================================================================")
-        print("=    OPTIONS:                                                                =")
-        print("=    1. View hypothesis                                                      =")
-        print("=    2. View dataset for 1996 Chicago Bulls                                  =")
-        print("=    3. view dataset for 2016 Golden State Warriors                          =")
-        print("=    4. View averages for 1996 Chicago Bulls                                 =")
-        print("=    5. View averages for 2016 Golden State Warriors                         =")
-        print("=    6. View graph for 2016 Golden State Warriors averages                   =")
-        print("=    7. View graph for 1996 Chicago Bulls averages                           =")
-        print("=    8. View team average graph for 2016 Golden State Warriors               =")
-        print("=    9. View team average graph for 1996 Chicago Bulls                       =")
-        print("=    10. Exit                                                                =")
-        print("==============================================================================")
+        typewrite("==============================================================================")
+        typewrite("=                           (  DATA INTERFACE  )                             =")
+        typewrite("=             --1996 CHICAGO BULLS VS 2016 GOLDEN STATE WARRIORS--           =")
+        typewrite("==============================================================================")
+        typewrite("=    OPTIONS:                                                                =")
+        typewrite("=    1. View hypothesis                                                      =")
+        typewrite("=    2. View dataset for 1996 Chicago Bulls                                  =")
+        typewrite("=    3. view dataset for 2016 Golden State Warriors                          =")
+        typewrite("=    4. View averages for 1996 Chicago Bulls                                 =")
+        typewrite("=    5. View averages for 2016 Golden State Warriors                         =")
+        typewrite("=    6. View graph for 2016 Golden State Warriors averages                   =")
+        typewrite("=    7. View graph for 1996 Chicago Bulls averages                           =")
+        typewrite("=    8. View team average graph for 2016 Golden State Warriors               =")
+        typewrite("=    9. View team average graph for 1996 Chicago Bulls                       =")
+        typewrite("=    11. View regular season record for 2016 Golden State Warriors           =")
+        typewrite("=    12. View regular season record for 1996 Chicago Bulls                   =")
+        typewrite("=    10. Exit                                                                =")
+        typewrite("==============================================================================")
         choice = input("select an option from 1-10: ")
-        print(":----------------------------------------------------------------------------:")
+        typewrite(":----------------------------------------------------------------------------:")
         if choice == "1":
-            print('The 2016 Golden state Warriors are better than 1996 Chicago Bulls in the Regular season')
+            typewrite('The 2016 Golden state Warriors are better than 1996 Chicago Bulls in the Regular season')
         elif choice == "2":
             display_dataset_preview_bulls()
         elif choice == "3":
@@ -49,10 +59,14 @@ def main_menu():
         elif choice == "9":
             chicago_team_average()
         elif choice == "10":
-            print("Exiting Data Interface")
+            track_record_gsw()
+        elif choice == "11":
+            track_record_chicago()
+        elif choice == "12":
+            typewrite("Exiting the program. Goodbye!")
             break
         else:
-            print("Invalid selection. Please choose an option 1-10")
+            typewrite("Invalid selection. Please choose an option 1-12")
 
 if __name__ == "__main__":
     main_menu()
