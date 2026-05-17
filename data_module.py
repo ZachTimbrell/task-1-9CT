@@ -1,15 +1,14 @@
-import os
-os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
+
 import matplotlib.pyplot as plt
 import pandas as pd
-from pathlib import Path
 
-GSW_FILE = Path("data/basketball.csv")
-BULLS_FILE = Path("data/chicago.csv")
-GSW_AVERAGES_FILE = Path("data/averages_gsw.csv")
-BULLS_AVERAGES_FILE = Path("data/averages_Chicago.csv")
-GSW_RECORD_FILE = Path("data/track_record_gsw.csv")
-CHICAGO_TRACK_RECORD = Path("data/track_record_chicago.csv")
+
+GSW_FILE = ("data/basketball.csv")
+BULLS_FILE = ("data/chicago.csv")
+GSW_AVERAGES_FILE = ("data/averages_gsw.csv")
+BULLS_AVERAGES_FILE = ("data/averages_Chicago.csv")
+GSW_RECORD_FILE = ("data/track_record_gsw.csv")
+CHICAGO_TRACK_RECORD = ("data/track_record_chicago.csv")
 
 GSW_df = pd.read_csv(GSW_FILE)
 chicago_df = pd.read_csv(BULLS_FILE)
@@ -28,7 +27,7 @@ def _display_table(title, df):
     print
 
 
-def _create_average_graph(title, df, output_file, open_graph=True):
+def _create_average_graph(title, df, output_file):
     graph_columns = ["Pts", "Ast", "Stl", "Blk"]
     graph_data = df[["Player"] + graph_columns].set_index("Player")
     
@@ -41,12 +40,12 @@ def _create_average_graph(title, df, output_file, open_graph=True):
     plt.savefig(output_file)
     plt.close()
 
-    graph_path = Path(output_file).resolve()
+    graph_path = (output_file).resolve()
     print(f"\nGraph saved as {graph_path}\n")
 
 
 
-def _create_team_average_graph(title, df, output_file, open_graph=True):
+def _create_team_average_graph(title, df, output_file):
     graph_columns = {
         "Pts": "Points",
         "TRb": "Rebounds",
@@ -65,7 +64,7 @@ def _create_team_average_graph(title, df, output_file, open_graph=True):
     plt.savefig(output_file)
     plt.close()
 
-    graph_path = Path(output_file).resolve()
+    graph_path = (output_file).resolve()
     print(f"\nGraph saved as {graph_path}\n")
 
 
