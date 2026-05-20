@@ -9,6 +9,7 @@ from data_module import  (
   chicago_team_average,
   track_record_chicago,
   track_record_gsw,
+  search_data,
 
 )
 import time
@@ -16,7 +17,7 @@ def typewrite(text):
     for char in text:
         print(char, end="", flush=True)
         time.sleep(0.005)
-    print()  # Move to the next line after printing the text
+    print() 
 
 def main_menu():
     while True:
@@ -63,10 +64,12 @@ def main_menu():
         elif choice == "11":
             track_record_chicago()
         elif choice == "12":
+            search_data
+        elif choice == "13":
             typewrite("Exiting the program. Goodbye!")
             break
         else:
-            typewrite("Invalid selection. Please choose an option 1-12")
+            typewrite("Invalid selection. Please choose an option 1-13")
 
 if __name__ == "__main__":
     main_menu()

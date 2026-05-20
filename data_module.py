@@ -42,6 +42,23 @@ def _create_average_graph(title, df, output_file):
     graph_path = output_file
     print(f"\nGraph saved as {graph_path}\n")
 
+def search_data(df, column_name, search_value):
+    if column_name not in df.columns:
+        print(f"Column '{column_name}' does not exist.")
+        return
+
+    results = df[
+        df[column_name]
+        .astype(str)
+        .str.contains(str(search_value), case=False, na=False)
+    ]
+
+    if results.empty:
+        print(f"No results found for '{search_value}'.")
+    else:
+        print("\nSearch Results")
+        print("-" * 14)
+        print(results.to_string(index=False))
 
 def _create_team_average_graph(title, df, output_file):
     graph_columns = {
