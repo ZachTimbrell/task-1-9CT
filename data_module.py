@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -40,9 +39,8 @@ def _create_average_graph(title, df, output_file):
     plt.savefig(output_file)
     plt.close()
 
-    graph_path = (output_file).resolve()
+    graph_path = output_file
     print(f"\nGraph saved as {graph_path}\n")
-
 
 
 def _create_team_average_graph(title, df, output_file):
@@ -64,7 +62,7 @@ def _create_team_average_graph(title, df, output_file):
     plt.savefig(output_file)
     plt.close()
 
-    graph_path = (output_file).resolve()
+    graph_path = output_file
     print(f"\nGraph saved as {graph_path}\n")
 
 
@@ -88,6 +86,24 @@ def track_record_gsw():
 
 def track_record_chicago():
     _display_table("1996 Chicago Bulls Regular Season Record", chicago_record_df)
+
+def search_data(df, column_name, search_value):
+    if column_name not in df.columns:
+        print(f"Column '{column_name}' does not exist.")
+        return
+
+    results = df[
+        df[column_name]
+        .astype(str)
+        .str.contains(str(search_value), case=False, na=False)
+    ]
+
+    if results.empty:
+        print(f"No results found for '{search_value}'.")
+    else:
+        print("\nSearch Results")
+        print("-" * 14)
+        print(results.to_string(index=False))
 
 def average_chicago_graph():
     _create_average_graph(
@@ -116,3 +132,21 @@ def chicago_team_average():
         "1996 Chicago Bulls Team Averages",
         chicago_averages_df,
         "data/chicago_team_average.png",)
+
+def search_gsw_players(player_name):
+    search_data(GSW_df, "Player", player_name)
+
+
+
+def search_chicago_players(player_name):
+    search_data(chicago_df, "Player", player_name)
+
+
+
+def search_gsw_averages(player_name):
+    search_data(GSW_averages_df, "Player", player_name)
+
+
+
+def search_chicago_averages(player_name):
+    search_data(chicago_averages_df, "Player", player_name)
